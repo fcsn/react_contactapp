@@ -1,10 +1,13 @@
 import React from 'react';
 import ContactInfo from './contactInfo';
+import ContactDetails from './contactDetails';
 
 export default class ContactMain extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
+      selectedKey: -1,
       keyword: '',
       contactData: [{
         name: 'Green',
@@ -21,13 +24,22 @@ export default class ContactMain extends React.Component {
       }]
     }
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   };
 
   handleChange(e) {
     this.setState({
       keyword: e.target.value
-    })
+    });
   }
+
+  handleClick(key) {
+    this.setState({
+      selectedKey: key
+    }); //selectedKey를 받은 파라미터(key)로 바꿔줌
+    console.log(key, 'is selected');
+  }
+
 
   render() {
     const mapToComponents = (data) => {
@@ -39,7 +51,7 @@ export default class ContactMain extends React.Component {
         }
       );
       return data.map((contact, i) => {
-        return (<ContactInfo contact={contact} key={i}/>);
+        return (<ContactInfo contact={contact} key={i} onClick={() => this.handleClick(i)}/>);
       });
     };
 
@@ -53,6 +65,8 @@ export default class ContactMain extends React.Component {
           onChange={this.handleChange}
         />
         <div>{mapToComponents(this.state.contactData)}</div>
+        <ContactDetails isSelected={this.state.selectedKey != -1}
+                        contact={this.state.contactData[this.state.selectedKey]}/>
       </div>
     );
   }
