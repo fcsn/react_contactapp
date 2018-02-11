@@ -43,7 +43,7 @@ export default class ContactCreate extends React.Component {
               value={this.state.name}
               onChange={this.handleChange}
             />
-              <input
+            <input
               type="text"
               name="phone"
               placeholder="phone"
