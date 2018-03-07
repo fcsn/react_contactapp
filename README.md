@@ -13,9 +13,9 @@
 Using javascript map function, we can return component. 
 ```
 arr.map(callback, [thisArg])
-
+```
 callback functions are going to have three parameters:
-
+```
 currentValue
 
 index
